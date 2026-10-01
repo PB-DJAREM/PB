@@ -725,6 +725,37 @@ footer{margin-top:70px;}
   text-transform:uppercase; color:var(--accent); border-bottom:1px solid transparent; transition:border-color 0.25s ease;
 }
 .map-link:hover{border-color:var(--accent);}
+
+/* ---------- PROGRAM: KLIK UNTUK MEMBUKA ---------- */
+.program-item{display:block; padding:0; overflow:hidden;}
+.program-item.open{border-color:rgba(220,38,38,0.5);}
+.program-head{
+  display:flex; align-items:center; gap:20px; width:100%; padding:22px 26px;
+  background:none; border:none; cursor:pointer; text-align:left; color:inherit; font-family:inherit;
+}
+.program-title{flex:1; min-width:0; display:flex; flex-direction:column; align-items:flex-start; gap:8px;}
+.program-name{
+  font-family:'Anton', sans-serif; font-size:22px; line-height:1.15; letter-spacing:0.5px;
+  text-transform:uppercase; color:var(--text-heading);
+}
+.program-title .program-coach{margin-bottom:0;}
+.program-num{flex-shrink:0;}
+.program-chevron{
+  flex-shrink:0; width:30px; height:30px; border-radius:50%; border:1px solid var(--border);
+  display:flex; align-items:center; justify-content:center; color:var(--text-heading);
+  transition:transform 0.35s cubic-bezier(.2,.8,.2,1), background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+.program-item.open .program-chevron{transform:rotate(180deg); background:var(--accent); color:#fff; border-color:var(--accent);}
+.program-body{max-height:0; overflow:hidden; transition:max-height 0.4s cubic-bezier(.2,.8,.2,1);}
+.program-body-inner{padding:0 26px 26px 101px;}
+.program-body-inner > :first-child{margin-top:0;}
+.program-body-inner > :last-child{margin-bottom:0;}
+@media (max-width:760px){
+  .program-head{padding:18px 16px; gap:14px;}
+  .program-name{font-size:18px;}
+  .program-body-inner{padding:0 18px 20px 18px;}
+  .program-chevron{width:28px; height:28px;}
+}
 </style>
 </head>
 <body class="no-scroll">
@@ -788,7 +819,7 @@ footer{margin-top:70px;}
       </div>
       <div class="banner-info-table">
         <div class="banner-info-row">
-          <span class="banner-info-label">Memulai Langkah di</span>
+          <span class="banner-info-label">MEMULAI LANGKAH DI</span>
           <span class="banner-info-value">2025</span>
         </div>
       </div>
@@ -887,59 +918,87 @@ footer{margin-top:70px;}
     <div class="program-list">
 
       <div class="program-item reveal-on-scroll">
-        <div class="program-num">01</div>
-        <div class="program-content">
-          <h3>Latihan Rutin</h3>
-          <div class="program-coach">Rabu | 19.00–22.00 WIB</div>
-          <p>
-            Permainan bebas dan pertandingan internal untuk meningkatkan konsistensi, strategi, adaptasi, serta kekompakan anggota.
-          </p>
-          <div class="program-detail">
-            <strong>Kegiatan:</strong>
-            <span>Main bersama, pertandingan internal, dan evaluasi.</span>
+        <button class="program-head" type="button" aria-expanded="false">
+          <span class="program-num">01</span>
+          <span class="program-title">
+            <span class="program-name">Latihan Rutin</span>
+            <span class="program-coach">Rabu | 19.00–22.00 WIB</span>
+          </span>
+          <span class="program-chevron"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+        </button>
+        <div class="program-body">
+          <div class="program-body-inner program-content">
+            <p>
+              Permainan bebas dan pertandingan internal untuk meningkatkan konsistensi, strategi, adaptasi, serta kekompakan anggota.
+            </p>
+            <div class="program-detail">
+              <strong>Kegiatan:</strong>
+              <span>Main bersama, pertandingan internal, dan evaluasi.</span>
+            </div>
           </div>
         </div>
       </div>
 
       <div class="program-item reveal-on-scroll">
-        <div class="program-num">02</div>
-        <div class="program-content">
-          <h3>Program Drilling</h3>
-          <div class="program-coach">Sabtu | 16.00–19.00 WIB</div>
-          <div class="program-notice">
-            <strong>⚠️ DRILLING SEMENTARA DILIBURKAN</strong>
-            <span>
-              Program drilling dihentikan sementara hingga informasi lebih lanjut. Jadwal dan pelaksanaan drilling akan diinformasikan kembali melalui kanal resmi PB Djarem Malang.
-            </span>
+        <button class="program-head" type="button" aria-expanded="false">
+          <span class="program-num">02</span>
+          <span class="program-title">
+            <span class="program-name">Program Drilling</span>
+            <span class="program-coach">Sabtu | 16.00–19.00 WIB</span>
+          </span>
+          <span class="program-chevron"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+        </button>
+        <div class="program-body">
+          <div class="program-body-inner program-content">
+            <div class="program-notice">
+              <strong>⚠️ DRILLING SEMENTARA DILIBURKAN</strong>
+              <span>
+                Program drilling dihentikan sementara hingga informasi lebih lanjut. Jadwal dan pelaksanaan drilling akan diinformasikan kembali melalui kanal resmi PB Djarem Malang.
+              </span>
+            </div>
           </div>
         </div>
       </div>
 
       <div class="program-item reveal-on-scroll">
-        <div class="program-num">03</div>
-        <div class="program-content">
-          <h3>Main Bersama</h3>
-          <div class="program-coach">Sabtu | 19.00–22.00 WIB</div>
-          <p>
-            Sesi permainan bersama untuk menerapkan teknik dan strategi melalui pertandingan dengan anggota dari berbagai tingkat kemampuan.
-          </p>
-          <div class="program-detail">
-            <strong>Kegiatan:</strong>
-            <span>Main bebas, sparring, pertandingan internal, dan evaluasi.</span>
+        <button class="program-head" type="button" aria-expanded="false">
+          <span class="program-num">03</span>
+          <span class="program-title">
+            <span class="program-name">Main Bersama</span>
+            <span class="program-coach">Sabtu | 19.00–22.00 WIB</span>
+          </span>
+          <span class="program-chevron"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+        </button>
+        <div class="program-body">
+          <div class="program-body-inner program-content">
+            <p>
+              Sesi permainan bersama untuk menerapkan teknik dan strategi melalui pertandingan dengan anggota dari berbagai tingkat kemampuan.
+            </p>
+            <div class="program-detail">
+              <strong>Kegiatan:</strong>
+              <span>Main bebas, pertandingan internal, dan evaluasi.</span>
+            </div>
           </div>
         </div>
       </div>
 
       <div class="program-item reveal-on-scroll">
-        <div class="program-num">04</div>
-        <div class="program-content">
-          <h3>Pembinaan Berdasarkan Level</h3>
-          <p>
-            Program latihan disesuaikan dengan kemampuan setiap pemain, mulai dari pemula hingga pemain berpengalaman.
-          </p>
-          <div class="program-detail">
-            <strong>Fokus:</strong>
-            <span>Pengembangan teknik, konsistensi, strategi, disiplin, dan sportivitas.</span>
+        <button class="program-head" type="button" aria-expanded="false">
+          <span class="program-num">04</span>
+          <span class="program-title">
+            <span class="program-name">Pembinaan Berdasarkan Level</span>
+          </span>
+          <span class="program-chevron"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+        </button>
+        <div class="program-body">
+          <div class="program-body-inner program-content">
+            <p>
+              Program latihan disesuaikan dengan kemampuan setiap pemain, mulai dari pemula hingga pemain berpengalaman.
+            </p>
+            <div class="program-detail">
+              <strong>Fokus:</strong>
+              <span>Pengembangan teknik, konsistensi, strategi, disiplin, dan sportivitas.</span>
+            </div>
           </div>
         </div>
       </div>
@@ -1355,6 +1414,33 @@ toggle.addEventListener('click', () => {
       ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
       this.appendChild(ripple);
       setTimeout(() => ripple.remove(), 650);
+    });
+  });
+})();
+
+// ---- Program accordion ----
+(function(){
+  const items = document.querySelectorAll('.program-item');
+  items.forEach(item => {
+    const head = item.querySelector('.program-head');
+    const body = item.querySelector('.program-body');
+    head.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      items.forEach(o => {
+        o.classList.remove('open');
+        o.querySelector('.program-body').style.maxHeight = null;
+        o.querySelector('.program-head').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        body.style.maxHeight = body.scrollHeight + 'px';
+        head.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+  window.addEventListener('resize', () => {
+    document.querySelectorAll('.program-item.open .program-body').forEach(b => {
+      b.style.maxHeight = b.scrollHeight + 'px';
     });
   });
 })();
