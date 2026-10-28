@@ -177,9 +177,9 @@ nav{
   overflow:hidden; z-index:1;
 }
 .banner-container{
-  position:relative; width:100%; height:235px; display:grid;
-  grid-template-columns:42% 37% 21%;
-  grid-template-rows:190px 45px;
+  position:relative; width:100%; height:250px; display:grid;
+  grid-template-columns:38% 42% 20%;
+  grid-template-rows:205px 45px;
   overflow:hidden; box-sizing:border-box;
   background-color:#8a6500;
   background-image:
@@ -247,7 +247,7 @@ nav{
 }
 .player-img{
   position:absolute; left:50%; bottom:-1px; transform:translateX(-50%);
-  width:108%; height:100%; object-fit:contain; object-position:center bottom;
+  width:120%; height:100%; object-fit:contain; object-position:center bottom;
   z-index:5; pointer-events:none; filter:drop-shadow(0 6px 8px rgba(0,0,0,0.30));
 }
 .banner-right{
@@ -290,7 +290,7 @@ nav{
 
 
 @media (max-width:1100px){
-  .banner-container{height:220px; grid-template-columns:43% 36% 21%; grid-template-rows:180px 40px;}
+  .banner-container{height:235px; grid-template-columns:41% 39% 20%; grid-template-rows:195px 40px;}
   .banner-left{padding-left:1px;}
   .sponsor-logo{width:80px; height:80px;}
   .brand-area{gap:10px;}
@@ -307,7 +307,7 @@ nav{
   .banner-footer img{max-width:54px; max-height:27px;}
 }
 @media (max-width:768px){
-  .banner-container{height:175px; grid-template-columns:48% 32% 20%; grid-template-rows:140px 35px;}
+  .banner-container{height:190px; grid-template-columns:46% 34% 20%; grid-template-rows:155px 35px;}
   .banner-left{padding:7px 5px 10px 12px;}
   .brand-area{gap:7px; margin-bottom:7px;}
   .sponsor-logo{width:55px; height:55px;}
@@ -319,7 +319,7 @@ nav{
   .banner-info-value{min-width:42px; height:25px; padding:0 5px; font-size:8px;}
   .headline{top:7px; font-size:12px;}
   .join-text{top:35px; padding:2px 6px; font-size:5px;}
-  .player-img{width:120%;}
+  .player-img{width:132%;}
   .right-logo{height:52px; min-height:52px; padding:3px; border-radius:0 0 0 8px;}
   .right-logo img{width:48px; height:48px;}
   .social-info{padding:0 4px 4px 2px;}
@@ -331,7 +331,8 @@ nav{
   .banner-footer img{max-width:40px; max-height:20px;}
 }
 @media (max-width:480px){
-  .banner-container{height:150px; grid-template-columns:50% 30% 20%; grid-template-rows:120px 30px;}
+  .banner-container{height:165px; grid-template-columns:47% 33% 20%; grid-template-rows:135px 30px;}
+  .player-img{width:138%;}
   .banner-left{padding-left:8px;}
   .sponsor-logo{width:45px; height:45px;}
   .brand-area{gap:5px; margin-bottom:5px;}
@@ -726,35 +727,25 @@ footer{margin-top:70px;}
 }
 .map-link:hover{border-color:var(--accent);}
 
-/* ---------- PROGRAM: KLIK UNTUK MEMBUKA ---------- */
-.program-item{display:block; padding:0; overflow:hidden;}
-.program-item.open{border-color:rgba(220,38,38,0.5);}
-.program-head{
-  display:flex; align-items:center; gap:20px; width:100%; padding:22px 26px;
-  background:none; border:none; cursor:pointer; text-align:left; color:inherit; font-family:inherit;
+
+/* ---------- PROGRAM: INFO JADWAL ---------- */
+.program-info{
+  margin-top:10px; padding:32px; border-radius:16px;
+  border:1px solid rgba(251,191,36,0.25); background:rgba(255,255,255,0.02);
 }
-.program-title{flex:1; min-width:0; display:flex; flex-direction:column; align-items:flex-start; gap:8px;}
-.program-name{
-  font-family:'Anton', sans-serif; font-size:22px; line-height:1.15; letter-spacing:0.5px;
-  text-transform:uppercase; color:var(--text-heading);
+.program-info-title{font-size:24px; margin-bottom:20px;}
+.program-schedule{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+.schedule-item{
+  display:flex; flex-direction:column; gap:6px; padding:18px 22px; border-radius:12px;
+  border-left:3px solid var(--accent); background:rgba(220,38,38,0.06);
 }
-.program-title .program-coach{margin-bottom:0;}
-.program-num{flex-shrink:0;}
-.program-chevron{
-  flex-shrink:0; width:30px; height:30px; border-radius:50%; border:1px solid var(--border);
-  display:flex; align-items:center; justify-content:center; color:var(--text-heading);
-  transition:transform 0.35s cubic-bezier(.2,.8,.2,1), background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-}
-.program-item.open .program-chevron{transform:rotate(180deg); background:var(--accent); color:#fff; border-color:var(--accent);}
-.program-body{max-height:0; overflow:hidden; transition:max-height 0.4s cubic-bezier(.2,.8,.2,1);}
-.program-body-inner{padding:0 26px 26px 101px;}
-.program-body-inner > :first-child{margin-top:0;}
-.program-body-inner > :last-child{margin-bottom:0;}
-@media (max-width:760px){
-  .program-head{padding:18px 16px; gap:14px;}
-  .program-name{font-size:18px;}
-  .program-body-inner{padding:0 18px 20px 18px;}
-  .program-chevron{width:28px; height:28px;}
+.schedule-day{font-family:'Oswald'; font-size:13px; letter-spacing:2px; text-transform:uppercase; color:var(--accent);}
+.schedule-time{font-family:'Anton', sans-serif; font-size:26px; letter-spacing:0.5px; color:var(--text-heading);}
+@media (max-width:600px){
+  .program-info{padding:22px 18px;}
+  .program-info-title{font-size:20px;}
+  .program-schedule{grid-template-columns:1fr;}
+  .schedule-time{font-size:22px;}
 }
 </style>
 </head>
@@ -819,8 +810,8 @@ footer{margin-top:70px;}
       </div>
       <div class="banner-info-table">
         <div class="banner-info-row">
-          <span class="banner-info-label">MEMULAI LANGKAH DI</span>
-          <span class="banner-info-value">2025</span>
+          <span class="banner-info-label">INVITATION TOURNAMENT</span>
+          <span class="banner-info-value">26-27 Sep 2026</span>
         </div>
       </div>
     </div>
@@ -829,7 +820,7 @@ footer{margin-top:70px;}
     <div class="banner-center">
       <h2 class="headline"><span>PB DJAREM</span> MALANG</h2>
       <p class="banner-tagline">Come play with us again</p>
-      <img src="fotobersama.PB Djarem.png" alt="Foto Bersama PB Djarem Malang" class="player-img">
+      <img src="fotokita.png" alt="Foto Bersama PB Djarem Malang" class="player-img">
     </div>
 
     <!-- KANAN -->
@@ -884,18 +875,18 @@ footer{margin-top:70px;}
     <p class="slogan">“Awal Langkah dan Dedikasi”</p>
 
     <p class="hero-lead">
-      PB Djarem Malang adalah komunitas bulu tangkis yang hadir sebagai wadah bagi para pecinta olahraga di Malang dari berbagai usia, latar belakang, dan tingkat kemampuan.
+      Mau Main Badminton Bareng Sambil Nambah Teman? Gabung ke PB Djarem Malang Aja!
     </p>
 
-          <p>
-        Lebih dari sekadar bermain bulu tangkis, PB Djarem mengutamakan <strong>kebersamaan, sportivitas, kesehatan, dan silaturahmi</strong>. Kami menciptakan lingkungan yang ramah bagi pemula maupun pemain berpengalaman untuk berlatih, berbagi ilmu, dan berkembang bersama.
-      </p>
-      <p>
-        Dengan semangat kebersamaan, PB Djarem Malang terus membangun komunitas yang aktif, sehat, dan positif bagi masyarakat Malang dan sekitarnya.
-      </p>
+    <p>
+      Buat kamu warga Malang dan sekitarnya yang hobi main bulu tangkis, PB Djarem Malang hadir sebagai <strong>safe space</strong> buat semua kalangan. Gak peduli umur, background, atau jago tidaknya skill kamu—semua welcome di sini!
+    </p>
+    <p>
+      Lebih dari sekadar kejar skor di lapangan, PB Djarem itu soal vibes yang seru, sehat, dan penuh kekeluargaan. Mulai dari pemula yang baru pegang raket sampai pemain pro yang haus latihan, semuanya kumpul bareng buat keringetan sambil seru-seruan.
+    </p>
 
     <p class="hero-closing">
-      Mari bermain, berkembang, dan menjadi bagian dari keluarga besar PB Djarem Malang!
+      Yuk, gabung sama kita! Waktunya hidup sehat, seru-seruan bareng, dan bangun energi positif lewat badminton.
     </p>
   </div>
 </header>
@@ -904,105 +895,25 @@ footer{margin-top:70px;}
 <section class="program" id="program">
   <div class="container">
     <div class="sec-head reveal-on-scroll">
-      <span class="eyebrow">01 — Program Latihan</span>
-      <h2>Bersama Berlatih, Bersama Berkembang</h2>
+      <span class="eyebrow">01 — Latihan</span>
+      <h2>Seru Seruan, Berlatih &amp; Berkembang</h2>
       <p>
-        Program latihan dirancang sebagai wadah bagi setiap pemain
-        untuk mengembangkan kemampuan, meningkatkan teknik permainan,
-        serta membangun pengalaman bertanding. Setiap kegiatan
-        disusun secara terjadwal dan disesuaikan dengan kebutuhan
-        serta tingkat kemampuan pemain.
+        Program latihan ini asyik banget buat tempat kamu seru-seruan sambil ningkatin skill, matengin teknik, dan nambah jam terbang tanding. Jadwalnya fleksibel dan pas banget sama gaya main kamu!
       </p>
     </div>
 
-    <div class="program-list">
-
-      <div class="program-item reveal-on-scroll">
-        <button class="program-head" type="button" aria-expanded="false">
-          <span class="program-num">01</span>
-          <span class="program-title">
-            <span class="program-name">Latihan Rutin</span>
-            <span class="program-coach">Rabu | 19.00–22.00 WIB</span>
-          </span>
-          <span class="program-chevron"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
-        </button>
-        <div class="program-body">
-          <div class="program-body-inner program-content">
-            <p>
-              Permainan bebas dan pertandingan internal untuk meningkatkan konsistensi, strategi, adaptasi, serta kekompakan anggota.
-            </p>
-            <div class="program-detail">
-              <strong>Kegiatan:</strong>
-              <span>Main bersama, pertandingan internal, dan evaluasi.</span>
-            </div>
-          </div>
+    <div class="program-info reveal-on-scroll">
+      <h3 class="program-info-title">Latihan Rutin &amp; Mabar</h3>
+      <div class="program-schedule">
+        <div class="schedule-item">
+          <span class="schedule-day">Rabu</span>
+          <span class="schedule-time">19.00–22.00 WIB</span>
+        </div>
+        <div class="schedule-item">
+          <span class="schedule-day">Sabtu</span>
+          <span class="schedule-time">19.00–22.00 WIB</span>
         </div>
       </div>
-
-      <div class="program-item reveal-on-scroll">
-        <button class="program-head" type="button" aria-expanded="false">
-          <span class="program-num">02</span>
-          <span class="program-title">
-            <span class="program-name">Program Drilling</span>
-            <span class="program-coach">Sabtu | 16.00–19.00 WIB</span>
-          </span>
-          <span class="program-chevron"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
-        </button>
-        <div class="program-body">
-          <div class="program-body-inner program-content">
-            <div class="program-notice">
-              <strong>⚠️ DRILLING SEMENTARA DILIBURKAN</strong>
-              <span>
-                Program drilling dihentikan sementara hingga informasi lebih lanjut. Jadwal dan pelaksanaan drilling akan diinformasikan kembali melalui kanal resmi PB Djarem Malang.
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="program-item reveal-on-scroll">
-        <button class="program-head" type="button" aria-expanded="false">
-          <span class="program-num">03</span>
-          <span class="program-title">
-            <span class="program-name">Main Bersama</span>
-            <span class="program-coach">Sabtu | 19.00–22.00 WIB</span>
-          </span>
-          <span class="program-chevron"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
-        </button>
-        <div class="program-body">
-          <div class="program-body-inner program-content">
-            <p>
-              Sesi permainan bersama untuk menerapkan teknik dan strategi melalui pertandingan dengan anggota dari berbagai tingkat kemampuan.
-            </p>
-            <div class="program-detail">
-              <strong>Kegiatan:</strong>
-              <span>Main bebas, pertandingan internal, dan evaluasi.</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="program-item reveal-on-scroll">
-        <button class="program-head" type="button" aria-expanded="false">
-          <span class="program-num">04</span>
-          <span class="program-title">
-            <span class="program-name">Pembinaan Berdasarkan Level</span>
-          </span>
-          <span class="program-chevron"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
-        </button>
-        <div class="program-body">
-          <div class="program-body-inner program-content">
-            <p>
-              Program latihan disesuaikan dengan kemampuan setiap pemain, mulai dari pemula hingga pemain berpengalaman.
-            </p>
-            <div class="program-detail">
-              <strong>Fokus:</strong>
-              <span>Pengembangan teknik, konsistensi, strategi, disiplin, dan sportivitas.</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
     </div>
   </div>
 </section>
@@ -1012,8 +923,7 @@ footer{margin-top:70px;}
   <div class="container">
     <div class="sec-head reveal-on-scroll">
       <span class="eyebrow">02 — FAQ</span>
-      <h2>Pertanyaan yang Sering Diajukan</h2>
-      <p>Beberapa hal yang biasa ditanyakan sebelum bergabung dengan PB Djarem Malang.</p>
+      <h2>FAQ Anak Mager Tapi PenGEN Jago Badminton</h2>
     </div>
 
     <div class="faq-list">
@@ -1021,49 +931,55 @@ footer{margin-top:70px;}
       <div class="faq-item reveal-on-scroll">
         <button class="faq-question" type="button">
           <span class="faq-num">01</span>
-          <span class="faq-q-text">Apakah harus daftar dulu sebelum datang latihan?</span>
-          <span class="faq-icon">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
-          </span>
+          <span class="faq-q-text">Wajib isi slot dulu ngga nih, sebelum gas mabar?</span>
+          <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span>
         </button>
         <div class="faq-answer">
-          <div class="faq-answer-inner">
-            Perlu. Klub kami membatasi jumlah anggota maksimal 16 orang per sesi, sehingga pendaftaran diperlukan agar kuota latihan dapat diatur dengan baik.
-          </div>
+          <div class="faq-answer-inner">Yoih, wajib banget! Biar admin bisa ngitung estimasi shuttlecock, nge-booking lapangan, plus ngatur pairing-an tim pas main nanti.</div>
         </div>
       </div>
 
       <div class="faq-item reveal-on-scroll delay-1">
         <button class="faq-question" type="button">
           <span class="faq-num">02</span>
-          <span class="faq-q-text">Berapa biaya untuk bergabung / latihan?</span>
-          <span class="faq-icon">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
-          </span>
+          <span class="faq-q-text">Emang pemula banget boleh langsung gabung, atau harus udah jago dulu?</span>
+          <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span>
         </button>
         <div class="faq-answer">
-          <div class="faq-answer-inner">Iuran latihan sebesar Rp25.000 per pertemuan.</div>
+          <div class="faq-answer-inner">Tenang, gak harus langsung seluwes Kevin Sanjaya kok. Semua level bakal dibimbing dan dicarikan lawan yang sebanding dulu!</div>
         </div>
       </div>
 
       <div class="faq-item reveal-on-scroll delay-2">
         <button class="faq-question" type="button">
           <span class="faq-num">03</span>
-          <span class="faq-q-text">Apakah ada batasan usia atau level kemampuan?</span>
-          <span class="faq-icon">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
-          </span>
+          <span class="faq-q-text">Biaya iuran bulanannya gimana? Kantong pelajar aman kan?</span>
+          <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span>
         </button>
         <div class="faq-answer">
-          <div class="faq-answer-inner">
-            Tidak ada. PB Djarem terbuka untuk semua usia dan tingkat kemampuan, mulai dari pemula hingga pemain berpengalaman.
-          </div>
+          <div class="faq-answer-inner">Dijamin aman &amp; sebanding sama fasilitas dan exp yang bakal kamu dapetin.</div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal-on-scroll delay-3">
+        <button class="faq-question" type="button">
+          <span class="faq-num">04</span>
+          <span class="faq-q-text">Biasanya alat-alat kayak raket harus bawa sendiri atau disediain?</span>
+          <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Sebaiknya bawa raket andalanmu sendiri ya, biar lebih klop pas dipakai smash!</div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal-on-scroll delay-4">
+        <button class="faq-question" type="button">
+          <span class="faq-num">05</span>
+          <span class="faq-q-text">Kira-kira kapan nih bisa mulai ikutan sparing atau turnamen?</span>
+          <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Kalau skill dasar kamu udah matang dan para member udah kasih lampu hijau, kamu bakal langsung dapet kesempatan buat unjuk gigi di tandingan!</div>
         </div>
       </div>
 
@@ -1418,32 +1334,6 @@ toggle.addEventListener('click', () => {
   });
 })();
 
-// ---- Program accordion ----
-(function(){
-  const items = document.querySelectorAll('.program-item');
-  items.forEach(item => {
-    const head = item.querySelector('.program-head');
-    const body = item.querySelector('.program-body');
-    head.addEventListener('click', () => {
-      const isOpen = item.classList.contains('open');
-      items.forEach(o => {
-        o.classList.remove('open');
-        o.querySelector('.program-body').style.maxHeight = null;
-        o.querySelector('.program-head').setAttribute('aria-expanded', 'false');
-      });
-      if (!isOpen) {
-        item.classList.add('open');
-        body.style.maxHeight = body.scrollHeight + 'px';
-        head.setAttribute('aria-expanded', 'true');
-      }
-    });
-  });
-  window.addEventListener('resize', () => {
-    document.querySelectorAll('.program-item.open .program-body').forEach(b => {
-      b.style.maxHeight = b.scrollHeight + 'px';
-    });
-  });
-})();
 </script>
 </body>
 </html>
