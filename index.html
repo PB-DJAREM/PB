@@ -907,7 +907,7 @@ body.admin .sc-pub{display:none;}
     <div class="banner-center">
       <h2 class="headline"><span>PB DJAREM</span> MALANG</h2>
       <p class="banner-tagline">Come play with us again</p>
-      <img src="fotokita.png" alt="Foto Bersama PB Djarem Malang" class="player-img">
+      <img src="fotobaru.png" alt="Foto Bersama PB Djarem Malang" class="player-img">
     </div>
 
     <!-- KANAN -->
@@ -994,7 +994,12 @@ body.admin .sc-pub{display:none;}
       </div>
       <button id="adminBtn" class="pri" onclick="PM.login()">Mode Admin</button>
     </div>
-    <p class="sp-hint">Klik <b>Mode Admin</b> dan masukkan PIN untuk menambah peserta dan mengisi hasil pertandingan.</p>
+    <p class="sp-hint">Admin: klik <b>Mode Admin</b> lalu login dengan email dan password untuk mengisi data. Penonton cukup membuka halaman ini.</p>
+    <form id="loginBox" class="sc-panel" hidden onsubmit="return PBAuth.submit(event)">
+      <h4>Login Admin</h4>
+      <div class="sp-row"><input id="lgE" type="email" placeholder="Email admin" autocomplete="username" required><input id="lgP" type="password" placeholder="Password" autocomplete="current-password" required><button class="pri" type="submit">Masuk</button><button type="button" onclick="PBAuth.close()">Batal</button></div>
+      <p id="lgM" class="sp-hint"></p>
+    </form>
 
     <!-- SPARING -->
     <div id="sp">
@@ -1530,22 +1535,16 @@ toggle.addEventListener('click', () => {
 
 // ---- Internal Turnamen (liga) ----
 const PM=(()=>{
-  const WIN=3, PIN='djarem123', KEY='pbdjarem_turnamen_v2';
+  const WIN=3, KEY='pbdjarem_turnamen_v2';
   const blank=()=>({name:'Internal Turnamen PB Djarem',date:'',loc:'',teams:[],matches:[],limit:3,started:false,ended:false});
   let D={tr:blank(),hist:[]}, fil='', admin=false;
   try{const x=localStorage.getItem(KEY); if(x)D=JSON.parse(x)}catch(e){}
   const $=id=>document.getElementById(id);
   const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(D))}catch(e){} render()};
+  const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(D))}catch(e){} render(); if(window.PBSync) PBSync.push('tr',D)};
   const fd=d=>d?new Date(d).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}):'';
 
-  function login(){
-    if(admin) admin=false;
-    else if(prompt('Masukkan PIN admin:')===PIN) admin=true;
-    else return alert('PIN salah');
-    document.body.classList.toggle('admin',admin);
-    $('adminBtn').textContent=admin?'Keluar Admin':'Mode Admin';
-  }
+  function login(){ if(window.PBAuth) PBAuth.toggle(); else alert('Database belum terhubung. Periksa koneksi internet.'); }
   function tab(k){['sp','tr'].forEach(x=>{$(x).hidden=x!==k; $('tab'+x).classList.toggle('on',x===k)})}
   function fill(){const T=D.tr; $('trN').value=T.name; $('trD').value=T.date; $('trL').value=T.loc; $('lim').value=T.limit}
   function ev(){const T=D.tr; T.name=$('trN').value.trim()||'Internal Turnamen PB Djarem'; T.date=$('trD').value; T.loc=$('trL').value.trim(); T.limit=Math.max(0,+$('lim').value||0); save()}
@@ -1673,7 +1672,8 @@ const PM=(()=>{
     const l=document.createElement('a'); l.href=cv.toDataURL('image/png'); l.download='hasil-turnamen.png'; l.click();
   }
   fill(); render();
-  return {login,tab,ev,add,del,addM,delM,end,reset,sc,setFil,arch,delH,wa,poster,refresh:render};
+  const load=o=>{D=o; fill(); render()}, dump=()=>D;
+  return {login,tab,ev,add,del,addM,delM,end,reset,sc,setFil,arch,delH,wa,poster,refresh:render,load,dump};
 })();
 
 // ---- Scoreboard Sparing ----
@@ -1684,7 +1684,7 @@ const SP=(()=>{
   try{const x=localStorage.getItem(KEY); if(x)D=JSON.parse(x)}catch(e){}
   const $=id=>document.getElementById(id);
   const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(D))}catch(e){alert('Penyimpanan penuh. Gunakan logo yang lebih kecil.')} render()};
+  const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(D))}catch(e){alert('Penyimpanan penuh. Gunakan logo yang lebih kecil.')} render(); if(window.PBSync) PBSync.push('sp',D)};
   const fd=d=>d?new Date(d).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}):'';
   const lg=(src,n)=>src?`<img class="sc-logo" src="${src}" alt="">`:`<span class="sc-logo ph">${esc((n||'?')[0].toUpperCase())}</span>`;
   const away=e=>e.away||'Klub Tamu';
@@ -1815,8 +1815,64 @@ const SP=(()=>{
     const l=document.createElement('a'); l.href=cv.toDataURL('image/png'); l.download='hasil-sparing.png'; l.click();
   }
   fill(); render();
-  return {ev,logo,addP,delP,addM,delM,sc,arch,newEv,delH,wa,poster,refresh:render};
+  const load=o=>{D=o; fill(); render()}, dump=()=>D;
+  return {ev,logo,addP,delP,addM,delM,sc,arch,newEv,delH,wa,poster,refresh:render,load,dump};
 })();
+</script>
+
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import {getFirestore,doc,onSnapshot,setDoc,serverTimestamp} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+import {getAuth,onAuthStateChanged,signInWithEmailAndPassword,signOut} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+
+const app=initializeApp({
+  apiKey:"AIzaSyATOultVxKU5LNUXS5N6yc39A36Ra6ZLYc",
+  authDomain:"pb-djarem.firebaseapp.com",
+  projectId:"pb-djarem",
+  storageBucket:"pb-djarem.firebasestorage.app",
+  messagingSenderId:"562988999223",
+  appId:"1:562988999223:web:9f13de7e27d810e17995b2"
+});
+const db=getFirestore(app), auth=getAuth(app);
+const refs={sp:doc(db,'pbdjarem','sparing'), tr:doc(db,'pbdjarem','turnamen')};
+const mods={sp:()=>SP, tr:()=>PM};
+const exists={sp:null,tr:null};
+let user=null;
+
+function push(k,obj){
+  if(!user) return;
+  setDoc(refs[k],{json:JSON.stringify(obj),updated:serverTimestamp()})
+    .catch(e=>alert('Gagal menyimpan ke database: '+e.message));
+}
+function migrate(k){ if(user&&exists[k]===false) push(k,mods[k]().dump()); }
+
+Object.keys(refs).forEach(k=>onSnapshot(refs[k],snap=>{
+  exists[k]=snap.exists();
+  if(snap.exists()){ try{ mods[k]().load(JSON.parse(snap.data().json)) }catch(e){ console.warn(e) } }
+  else migrate(k);
+},err=>console.warn('Firestore:',err.message)));
+
+onAuthStateChanged(auth,u=>{
+  user=u;
+  document.body.classList.toggle('admin',!!u);
+  document.getElementById('adminBtn').textContent=u?'Keluar Admin':'Mode Admin';
+  Object.keys(refs).forEach(migrate);
+});
+
+const box=()=>document.getElementById('loginBox');
+window.PBSync={push};
+window.PBAuth={
+  toggle(){ if(user) signOut(auth); else {box().hidden=false; document.getElementById('lgE').focus()} },
+  close(){ box().hidden=true },
+  submit(e){
+    e.preventDefault();
+    const m=document.getElementById('lgM'); m.textContent='Memeriksa…';
+    signInWithEmailAndPassword(auth,document.getElementById('lgE').value.trim(),document.getElementById('lgP').value)
+      .then(()=>{ box().hidden=true; m.textContent=''; document.getElementById('lgP').value='' })
+      .catch(()=>{ m.textContent='Login gagal: email atau password salah.' });
+    return false;
+  }
+};
 </script>
 </body>
 </html>
